@@ -1,0 +1,8 @@
+# Claude Design tool artifacts, not part of the live site
+/uploads/
+/screenshots/
+/.thumbnail
+
+# superseded by .webp versions
+/assets/*.png
+/assets/*.jpg

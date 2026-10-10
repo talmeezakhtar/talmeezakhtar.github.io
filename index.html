@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: Inter, Helvetica, Arial, sans-serif; letter-spacing: -0.05em; background: #b9cbe4; }
+  a { color: #16202b; text-decoration: none; }
+  a:hover { color: #d75f38; }
+  * { box-sizing: border-box; }
+  img { image-rendering: -webkit-optimize-contrast; }
+  html { scroll-behavior: smooth; }
+  section { scroll-margin-top: 84px; }
+  @media (max-width: 900px) {
+    [data-nav-desktop] { display: none !important; }
+    [data-nav-burger] { display: flex !important; }
+  }
+  @media (max-width: 860px) {
+    [data-hero-copy] { top: 20% !important; left: 50% !important; transform: translateX(-50%) !important; text-align: center; }
+    [data-hero-copy] > div { max-width: 92vw !important; }
+  }
+  @keyframes dogTrot {
+    0% { transform: translateY(0) rotate(0deg) scaleX(1); }
+    25% { transform: translateY(-7px) rotate(-6deg) scaleX(1.04); }
+    50% { transform: translateY(0) rotate(0deg) scaleX(1); }
+    75% { transform: translateY(-5px) rotate(5deg) scaleX(0.98); }
+    100% { transform: translateY(0) rotate(0deg) scaleX(1); }
+  }
+  @keyframes skillFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(-3deg); }
+  }
+  @keyframes dogIdle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-2px) rotate(-1.5deg); }
+  }
+</style>
+</helmet>
+<header ref="{{ navRef }}" data-nav="" style="position: fixed; top: 0; left: 0; right: 0; z-index: 60; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: clamp(10px, 1.5vw, 18px) clamp(14px, 3vw, 44px); color: #16202b; transition: background 0.45s ease, box-shadow 0.45s ease, color 0.45s ease;">
+    <a href="#top" style="display: flex; align-items: center; gap: 12px; color: inherit;">
+      <span style="width: clamp(34px, 3vw, 40px); height: clamp(34px, 3vw, 40px); border-radius: 11px; background: #d75f38; color: #fff; display: flex; align-items: center; justify-content: center; font-size: clamp(12px, 1.1vw, 15px); font-weight: 700; letter-spacing: -0.03em; box-shadow: 0 6px 18px rgba(120,50,25,0.28);">TA</span>
+      <span style="font-size: clamp(15px, 1.3vw, 19px); font-weight: 600; white-space: nowrap;">Talmeez Akhtar</span>
+    </a>
+    <nav data-nav-desktop="" style="display: flex; align-items: center; gap: clamp(14px, 2vw, 32px);">
+      <a href="#education" style="font-size: clamp(13px, 1.1vw, 16px); font-weight: 500; color: inherit;">Education</a>
+      <a href="#skills" style="font-size: clamp(13px, 1.1vw, 16px); font-weight: 500; color: inherit;">Skills</a>
+      <a href="#work" style="font-size: clamp(13px, 1.1vw, 16px); font-weight: 500; color: inherit;">Projects</a>
+      <a href="#contact" style="font-size: clamp(13px, 1.1vw, 16px); font-weight: 500; color: inherit;">Contact</a>
+      <sc-if value="{{ showAvailability }}" hint-placeholder-val="{{ true }}">
+        <span style="display: flex; align-items: center; gap: 9px; background: rgba(255,255,255,0.84); backdrop-filter: blur(6px); padding: clamp(7px, 0.8vw, 11px) clamp(12px, 1.3vw, 18px); border-radius: 999px; font-size: clamp(12px, 1.1vw, 15px); font-weight: 600; white-space: nowrap; box-shadow: 0 4px 16px rgba(30,50,80,0.14);">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #35a06a;"></span>Available to Hire</span>
+      </sc-if>
+    </nav>
+    <button data-nav-burger="" onClick="{{ toggleMenu }}" aria-label="Open menu" style="display: none; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 14px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; padding: 0; opacity: 0.85;">
+      <span style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+        <span style="width: 20px; height: 2px; border-radius: 2px; background: currentColor; display: block;"></span>
+        <span style="width: 20px; height: 2px; border-radius: 2px; background: currentColor; display: block;"></span>
+        <span style="width: 20px; height: 2px; border-radius: 2px; background: currentColor; display: block;"></span>
+      </span>
+    </button>
+  </header>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; top: 74px; left: clamp(10px, 3vw, 24px); right: clamp(10px, 3vw, 24px); z-index: 59; display: flex; flex-direction: column; gap: 2px; padding: 8px 6px; border-radius: 22px; background: transparent; box-shadow: none; color: #16202b;">
+      <a href="#education" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right; text-shadow: 0 1px 12px rgba(255,255,255,0.55);" style-hover="color: #d75f38;">Education</a>
+      <a href="#skills" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right; text-shadow: 0 1px 12px rgba(255,255,255,0.55);" style-hover="color: #d75f38;">Skills</a>
+      <a href="#work" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right; text-shadow: 0 1px 12px rgba(255,255,255,0.55);" style-hover="color: #d75f38;">Projects</a>
+      <a href="#contact" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right; text-shadow: 0 1px 12px rgba(255,255,255,0.55);" style-hover="color: #d75f38;">Contact</a>
+    </div>
+  </sc-if>
+<div ref="{{ stageRef }}" id="top" style="position: relative; width: 100%; height: 185vh;">
+<div style="position: sticky; top: 0; height: 100vh; overflow: hidden;">
+<div data-screen-label="Hero" style="--ring: min(clamp(260px, 60vw, 900px), 112vh); position: relative; width: 100%; height: 100%; overflow: hidden; background: #b9cbe4; font-family: Inter, Helvetica, Arial, sans-serif; letter-spacing: -0.05em; color: #16202b;">
+
+  <img ref="{{ skyRef }}" src="assets/sky.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 22%;">
+  
+
+
+
+
+
+  <img ref="{{ personRef }}" src="assets/person.webp" alt="Talmeez Akhtar" style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; height: min(70%, 700px); max-width: 132%; object-fit: contain; object-position: bottom; z-index: 3">
+
+  <img ref="{{ grassRef }}" src="assets/grass.webp" alt="" style="position: absolute; left: 50%; transform: translateX(-50%); width: max(112%, 1100px); height: auto; z-index: 2; pointer-events: none; top: 0;">
+
+  <div ref="{{ copyRef }}" data-hero-copy="" style="position: absolute; top: 44%; left: clamp(16px, 4vw, 72px); z-index: 4;">
+    <div style="max-width: min(560px, 44vw);">
+      <h1 style="margin: 0; font-family: Inter, Helvetica, Arial, sans-serif; font-size: clamp(34px, 5.6vw, 88px); line-height: 0.98; font-weight: 800; letter-spacing: -0.05em;">I'm a<br><b style="font-weight: inherit; color: #d75f38;">Full Stack Developer.</b></h1>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<section ref="{{ eduRef }}" data-screen-label="Education" id="education" style="position: relative; width: 100%; padding: clamp(64px, 10vh, 130px) clamp(16px, 4vw, 72px) clamp(52px, 8vh, 100px); background: #2a1d18; font-family: Inter, Helvetica, Arial, sans-serif; letter-spacing: -0.05em; color: #2a1d18; overflow: hidden;">
+
+  <img src="assets/sky.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 70%; transform: scaleY(-1); filter: sepia(0.55) saturate(1.35) hue-rotate(-18deg) brightness(0.92);">
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(185,203,228,0.42) 0%, rgba(240,200,164,0.44) 48%, rgba(214,150,116,0.58) 100%);"></div>
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: clamp(80px, 14vh, 180px); z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(185,203,228,0.9), rgba(185,203,228,0));"></div>
+  <div style="position: absolute; bottom: 0; left: 0; right: 0; height: clamp(80px, 14vh, 180px); z-index: 2; pointer-events: none; background: linear-gradient(0deg, rgba(214,150,116,0.92), rgba(214,150,116,0));"></div>
+
+  <div style="position: relative; z-index: 2; max-width: 1120px; margin: 0 auto;">
+
+    <div data-reveal="" style="opacity: 0; transform: translateY(30px); transition: opacity 0.85s cubic-bezier(0.2,0.75,0.2,1), transform 0.85s cubic-bezier(0.2,0.75,0.2,1); display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: clamp(32px, 5vh, 64px);">
+      <div>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: clamp(10px, 0.9vw, 12px); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #9e3d16;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: #d75f38;"></span>Education
+        </span>
+        <h2 style="margin: 14px 0 0; font-size: clamp(30px, 4vw, 62px); line-height: 0.95; font-weight: 800; letter-spacing: -0.05em;">Where I studied</h2>
+      </div>
+      <p style="margin: 0; max-width: 340px; font-size: clamp(12px, 1.05vw, 16px); line-height: 1.6; letter-spacing: -0.03em; color: #4a3225; text-wrap: pretty;">A short timeline of the schools and programs that shaped how I build software.</p>
+    </div>
+
+    <div ref="{{ timelineRef }}" style="position: relative; display: flex; flex-direction: column; gap: clamp(18px, 2.6vh, 30px);">
+
+      <div data-edu-traveler="" style="position: absolute; z-index: 5; left: 0; top: 0; width: 46px; margin-left: -23px; margin-top: -36px; display: flex; flex-direction: column; align-items: center; opacity: 0; pointer-events: none; transition: top 0.6s cubic-bezier(0.45, 0, 0.2, 1), opacity 0.4s ease;">
+        <img data-traveler-dog="" src="assets/dog.webp" alt="" style="width: 46px; height: auto; display: block; filter: drop-shadow(0 8px 12px rgba(106,58,32,0.3)); animation: dogIdle 2.6s ease-in-out infinite;">
+        <span data-traveler-year="" style="margin-top: -2px; padding: 3px 9px; border-radius: 999px; background: #fff6ee; border: 1.5px solid #d75f38; font-size: 11px; font-weight: 800; letter-spacing: -0.03em; color: #9e3d16; line-height: 1.2; white-space: nowrap; display: none">18</span>
+      </div>
+
+      <div data-edu-row="" style="display: flex; flex-wrap: wrap; align-items: stretch; column-gap: clamp(12px, 2vw, 28px); row-gap: 12px; transition: opacity 0.5s ease, transform 0.5s ease;">
+        <div style="flex: 0 0 auto; width: clamp(86px, 12vw, 150px); padding-top: clamp(18px, 2.2vw, 26px); text-align: right;">
+          <div style="font-size: clamp(15px, 1.5vw, 22px); font-weight: 700; letter-spacing: -0.04em;">2018 - 2019</div>
+          <div style="margin-top: 4px; font-size: clamp(12px, 1vw, 15px); font-weight: 600; color: #5b3d2b;">Secondary</div>
+        </div>
+        <div data-edu-rail="" style="flex: 0 0 22px; position: relative; display: flex; justify-content: center;">
+          <span style="position: absolute; top: clamp(22px, 2.6vw, 32px); bottom: -30px; width: 2px; background: rgba(140,96,68,0.4);"></span>
+          <img data-edu-node="" src="assets/bed.webp" alt="" style="position: relative; align-self: flex-start; flex: 0 0 auto; margin: clamp(18px, 2.2vw, 26px) -13px 0; width: 48px; height: 26px; aspect-ratio: 796 / 423; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(106,58,32,0.22)); transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;">
+        </div>
+        <div data-edu-card="" style="flex: 1 1 260px; min-width: 240px; background: rgba(255,249,242,0.82); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.75); border-radius: 20px; padding: clamp(18px, 2.2vw, 30px); box-shadow: 0 16px 38px rgba(106,58,32,0.16); transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;">
+          <h3 style="margin: 0; font-size: clamp(17px, 1.8vw, 26px); font-weight: 700; letter-spacing: -0.05em;">Daffodils Public School</h3>
+          <div style="margin-top: 6px; font-size: clamp(12px, 1.05vw, 15px); font-weight: 600; color: #c04f24;">AISSE (Class X) - 84.8%</div>
+          <p style="margin: 12px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #5b4438; text-wrap: pretty;">Mirzapur, Uttar Pradesh.</p>
+        </div>
+      </div>
+
+      <div data-edu-row="" style="display: flex; flex-wrap: wrap; align-items: stretch; column-gap: clamp(12px, 2vw, 28px); row-gap: 12px; transition: opacity 0.5s ease, transform 0.5s ease;">
+        <div style="flex: 0 0 auto; width: clamp(86px, 12vw, 150px); padding-top: clamp(18px, 2.2vw, 26px); text-align: right;">
+          <div style="font-size: clamp(15px, 1.5vw, 22px); font-weight: 700; letter-spacing: -0.04em;">2020 - 2021</div>
+          <div style="margin-top: 4px; font-size: clamp(12px, 1vw, 15px); font-weight: 600; color: #5b3d2b;">Intermediate</div>
+        </div>
+        <div data-edu-rail="" style="flex: 0 0 22px; position: relative; display: flex; justify-content: center;">
+          <span style="position: absolute; top: clamp(22px, 2.6vw, 32px); bottom: -30px; width: 2px; background: rgba(140,96,68,0.4);"></span>
+          <img data-edu-node="" src="assets/bed.webp" alt="" style="position: relative; align-self: flex-start; flex: 0 0 auto; margin: clamp(18px, 2.2vw, 26px) -13px 0; width: 48px; height: 26px; aspect-ratio: 796 / 423; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(106,58,32,0.22)); transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;">
+        </div>
+        <div data-edu-card="" style="flex: 1 1 260px; min-width: 240px; background: rgba(255,249,242,0.82); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.75); border-radius: 20px; padding: clamp(18px, 2.2vw, 30px); box-shadow: 0 16px 38px rgba(106,58,32,0.16); transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;">
+          <h3 style="margin: 0; font-size: clamp(17px, 1.8vw, 26px); font-weight: 700; letter-spacing: -0.05em;">Daffodils Public School</h3>
+          <div style="margin-top: 6px; font-size: clamp(12px, 1.05vw, 15px); font-weight: 600; color: #c04f24;">AISSCE (Class XII) - 83.6%</div>
+          <p style="margin: 12px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #5b4438; text-wrap: pretty;">Mirzapur, Uttar Pradesh.</p>
+        </div>
+      </div>
+
+      <div data-edu-row="" style="display: flex; flex-wrap: wrap; align-items: stretch; column-gap: clamp(12px, 2vw, 28px); row-gap: 12px; transition: opacity 0.5s ease, transform 0.5s ease;">
+        <div style="flex: 0 0 auto; width: clamp(86px, 12vw, 150px); padding-top: clamp(18px, 2.2vw, 26px); text-align: right;">
+          <div style="font-size: clamp(15px, 1.5vw, 22px); font-weight: 700; letter-spacing: -0.04em;">2021 - 2025</div>
+          <div style="margin-top: 4px; font-size: clamp(12px, 1vw, 15px); font-weight: 600; color: #5b3d2b;">Undergraduate</div>
+        </div>
+        <div data-edu-rail="" style="flex: 0 0 22px; position: relative; display: flex; justify-content: center;">
+          <img data-edu-node="" src="assets/bed.webp" alt="" style="position: relative; align-self: flex-start; flex: 0 0 auto; margin: clamp(18px, 2.2vw, 26px) -13px 0; width: 48px; height: 26px; aspect-ratio: 796 / 423; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(106,58,32,0.22)); transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;">
+        </div>
+        <div data-edu-card="" style="flex: 1 1 260px; min-width: 240px; background: rgba(255,249,242,0.82); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.75); border-radius: 20px; padding: clamp(18px, 2.2vw, 30px); box-shadow: 0 16px 38px rgba(106,58,32,0.16); transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;">
+          <h3 style="margin: 0; font-size: clamp(17px, 1.8vw, 26px); font-weight: 700; letter-spacing: -0.05em;">RCC Institute of Information Technology</h3>
+          <div style="margin-top: 6px; font-size: clamp(12px, 1.05vw, 15px); font-weight: 600; color: #c04f24;">B.Tech, Information Technology - CGPA 8.78</div>
+          <p style="margin: 12px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #5b4438; text-wrap: pretty;">Kolkata, West Bengal.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section ref="{{ skillsRef }}" data-screen-label="Skills" id="skills" style="position: relative; width: 100%; padding: clamp(64px, 10vh, 130px) clamp(16px, 4vw, 72px) clamp(70px, 11vh, 140px); background: #3a2630; font-family: Inter, Helvetica, Arial, sans-serif; letter-spacing: -0.05em; color: #fdf1e6; overflow: hidden;">
+
+  <img src="assets/sky.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: sepia(0.42) saturate(1.2) hue-rotate(-14deg) brightness(0.68);">
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(214,150,116,0.58) 0%, rgba(150,98,100,0.6) 50%, rgba(96,66,100,0.7) 100%);"></div>
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: clamp(80px, 14vh, 180px); z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(214,150,116,0.92), rgba(214,150,116,0));"></div>
+  <div style="position: absolute; bottom: 0; left: 0; right: 0; height: clamp(80px, 14vh, 180px); z-index: 2; pointer-events: none; background: linear-gradient(0deg, rgba(96,66,100,0.94), rgba(96,66,100,0));"></div>
+
+  <div ref="{{ trailRef }}" style="position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden;"></div>
+
+  <div style="position: relative; z-index: 4; max-width: 1120px; margin: 0 auto; pointer-events: none;">
+
+    <div data-reveal="" style="opacity: 0; transform: translateY(30px); transition: opacity 0.85s cubic-bezier(0.2,0.75,0.2,1), transform 0.85s cubic-bezier(0.2,0.75,0.2,1); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; margin-bottom: clamp(26px, 4.5vh, 52px);">
+      <span style="display: inline-flex; align-items: center; gap: 8px; font-size: clamp(10px, 0.9vw, 12px); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #ffb98c;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #ff9a5c;"></span>Skills
+      </span>
+      <h2 style="margin: 0; font-size: clamp(30px, 4vw, 62px); line-height: 0.95; font-weight: 800; letter-spacing: -0.05em;">What I build with</h2>
+      <p style="margin: 0; max-width: 420px; font-size: clamp(12px, 1.05vw, 16px); line-height: 1.6; letter-spacing: -0.03em; color: #f0dccb; text-wrap: pretty;">Languages, frameworks and tools I reach for day to day. Move your cursor across this section.</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(18px, 3.2vw, 46px); max-width: 860px; margin: 0 auto; padding: clamp(10px, 3vh, 40px) 0;">
+      <img src="https://skillicons.dev/icons?i=c" alt="C" title="C" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 0.00s infinite;">
+      <img src="https://skillicons.dev/icons?i=cpp" alt="C++" title="C++" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 0.27s infinite;">
+      <img src="https://skillicons.dev/icons?i=java" alt="Java" title="Java" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 0.54s infinite;">
+      <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" title="JavaScript" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 0.81s infinite;">
+      <img src="https://skillicons.dev/icons?i=ts" alt="TypeScript" title="TypeScript" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 1.08s infinite;">
+      <img src="https://skillicons.dev/icons?i=react" alt="React.js" title="React.js" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 1.35s infinite;">
+      <img src="https://skillicons.dev/icons?i=vite" alt="Vite" title="Vite" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 1.62s infinite;">
+      <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind CSS" title="Tailwind CSS" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 1.89s infinite;">
+      <img src="https://skillicons.dev/icons?i=html" alt="HTML5" title="HTML5" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 2.16s infinite;">
+      <img src="https://skillicons.dev/icons?i=css" alt="CSS3" title="CSS3" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 2.43s infinite;">
+      <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" title="Node.js" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 2.70s infinite;">
+      <img src="https://skillicons.dev/icons?i=nestjs" alt="NestJS" title="NestJS" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 2.97s infinite;">
+      <img src="https://skillicons.dev/icons?i=express" alt="Express.js" title="Express.js" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 3.24s infinite;">
+      <img src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL" title="PostgreSQL" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 3.51s infinite;">
+      <img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" title="MySQL" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 3.78s infinite;">
+      <img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB" title="MongoDB" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 4.05s infinite;">
+      <img src="https://skillicons.dev/icons?i=elasticsearch" alt="Elasticsearch" title="Elasticsearch" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 4.32s infinite;">
+      <img src="https://skillicons.dev/icons?i=aws" alt="AWS" title="AWS" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 4.59s infinite;">
+      <img src="https://skillicons.dev/icons?i=docker" alt="Docker" title="Docker" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 4.86s infinite;">
+      <img src="https://skillicons.dev/icons?i=git" alt="Git" title="Git" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 5.13s infinite;">
+      <img src="https://skillicons.dev/icons?i=github" alt="GitHub" title="GitHub" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 5.40s infinite;">
+      <img src="https://skillicons.dev/icons?i=postman" alt="Postman" title="Postman" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 5.67s infinite;">
+    </div>
+  </div>
+</section>
+
+
+<section ref="{{ projRef }}" data-screen-label="Projects" id="work" style="position: relative; width: 100%; padding: clamp(70px, 11vh, 140px) clamp(16px, 4vw, 72px) clamp(80px, 13vh, 160px); background: #262a52; font-family: Inter, Helvetica, Arial, sans-serif; letter-spacing: -0.05em; color: #f4ece4; overflow: hidden;">
+
+  <img src="assets/sky.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: saturate(0.85) brightness(0.46) hue-rotate(196deg);">
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(96,66,100,0.7) 0%, rgba(58,50,102,0.78) 45%, rgba(26,28,62,0.86) 100%);"></div>
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: clamp(80px, 14vh, 180px); z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(96,66,100,0.94), rgba(96,66,100,0));"></div>
+  <div style="position: absolute; bottom: 0; left: 0; right: 0; height: clamp(80px, 14vh, 180px); z-index: 2; pointer-events: none; background: linear-gradient(0deg, rgba(26,28,62,0.95), rgba(26,28,62,0));"></div>
+
+  <svg ref="{{ trailSvgRef }}" viewBox="0 0 1000 1000" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; overflow: visible;">
+    <path ref="{{ pathGhostRef }}" d="" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 12"></path>
+    <path ref="{{ pathRef }}" d="" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" opacity="0.85" style="filter: blur(4px);"></path>
+    <path ref="{{ pathCoreRef }}" d="" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.95"></path>
+  </svg>
+
+  <img ref="{{ planeRef }}" src="assets/plane.webp" alt="" style="position: absolute; left: 0; top: 0; width: clamp(86px, 9vw, 150px); height: auto; z-index: 6; pointer-events: none; opacity: 0; transform-origin: 50% 50%; filter: drop-shadow(0 14px 22px rgba(30,60,100,0.28));">
+
+  <div style="position: relative; z-index: 4; max-width: 1120px; margin: 0 auto;">
+
+    <div data-reveal="" style="opacity: 0; transform: translateY(30px); transition: opacity 0.85s cubic-bezier(0.2,0.75,0.2,1), transform 0.85s cubic-bezier(0.2,0.75,0.2,1); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; margin-bottom: clamp(34px, 6vh, 72px);">
+      <span style="display: inline-flex; align-items: center; gap: 8px; font-size: clamp(10px, 0.9vw, 12px); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #ffb98c;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #ff9a5c;"></span>Projects
+      </span>
+      <h2 style="margin: 0; font-size: clamp(30px, 4vw, 62px); line-height: 0.95; font-weight: 800; letter-spacing: -0.05em;">Things I've shipped</h2>
+      <p style="margin: 0; max-width: 420px; font-size: clamp(12px, 1.05vw, 16px); line-height: 1.6; letter-spacing: -0.03em; color: #e5dced; text-wrap: pretty;">Scroll to follow the flight path — each stop is a project.</p>
+    </div>
+
+    <div ref="{{ projGridRef }}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); column-gap: clamp(20px, 3vw, 44px); row-gap: clamp(48px, 9vh, 110px);">
+
+      <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.7s cubic-bezier(0.2,0.75,0.2,1), transform 0.7s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.7s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
+          <image-slot id="proj-1" shape="rect" placeholder="Drop Bunakar screenshot" src="assets/bunakar-preview.webp"></image-slot>
+        </div>
+        <div style="padding: clamp(18px, 2.2vw, 28px);">
+          <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Bunakar - Rug Design Studio</h3>
+          <p style="margin: 10px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #3c4b5c; text-wrap: pretty;">A full-stack rug design studio with tile-based and freeform editors, real-room previews via perspective homography, and production-ready tufting exports.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0;">
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">React</span>
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">NestJS</span>
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">PostgreSQL</span>
+          </div>
+          <a href="https://bunakar.vercel.app/" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 9px; margin-top: 20px; padding: 12px 20px; border-radius: 999px; background: #d75f38; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -0.03em; box-shadow: 0 8px 20px rgba(120,50,25,0.28);" style-hover="background: #b94b28; color: #fff;">Visit project<span style="font-size: 15px;">↗</span></a>
+        </div>
+      </article>
+
+      <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.7s cubic-bezier(0.2,0.75,0.2,1), transform 0.7s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.7s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
+          <image-slot id="proj-3" shape="rect" placeholder="Drop Color-Cadence screenshot" src="assets/color-cadence-preview.webp"></image-slot>
+        </div>
+        <div style="padding: clamp(18px, 2.2vw, 28px);">
+          <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Color-Cadence - 2024</h3>
+          <p style="margin: 10px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #3c4b5c; text-wrap: pretty;">A Simon-style memory game. Watch the color sequence, then play it back before it grows too long to follow.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0;">
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">JavaScript</span>
+          </div>
+          <a href="https://talmeezakhtar.github.io/Color-Cadence/" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 9px; margin-top: 20px; padding: 12px 20px; border-radius: 999px; background: #d75f38; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -0.03em; box-shadow: 0 8px 20px rgba(120,50,25,0.28);" style-hover="background: #b94b28; color: #fff;">Visit project<span style="font-size: 15px;">↗</span></a>
+        </div>
+      </article>
+
+      <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.7s cubic-bezier(0.2,0.75,0.2,1), transform 0.7s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.7s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
+          <image-slot id="proj-4" shape="rect" placeholder="Drop Drum Kit screenshot" src="assets/drumkit-preview.webp"></image-slot>
+        </div>
+        <div style="padding: clamp(18px, 2.2vw, 28px);">
+          <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Drum Kit - 2024</h3>
+          <p style="margin: 10px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #3c4b5c; text-wrap: pretty;">A playable drum kit in the browser. Six pads trigger real drum sounds from clicks or keystrokes.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0;">
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">JavaScript</span>
+          </div>
+          <a href="https://talmeezakhtar.github.io/DrumKit/" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 9px; margin-top: 20px; padding: 12px 20px; border-radius: 999px; background: #d75f38; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -0.03em; box-shadow: 0 8px 20px rgba(120,50,25,0.28);" style-hover="background: #b94b28; color: #fff;">Visit project<span style="font-size: 15px;">↗</span></a>
+        </div>
+      </article>
+
+      <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.7s cubic-bezier(0.2,0.75,0.2,1), transform 0.7s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.7s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
+          <image-slot id="proj-5" shape="rect" placeholder="Drop YM Rugs screenshot" src="assets/ym-rugs-preview.webp"></image-slot>
+        </div>
+        <div style="padding: clamp(18px, 2.2vw, 28px);">
+          <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">YM Rugs - 2023</h3>
+          <p style="margin: 10px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #3c4b5c; text-wrap: pretty;">A manufacturer and exporter landing page for hand-knotted and flat-woven rugs.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0;">
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">HTML</span>
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">CSS</span>
+          </div>
+          <a href="https://talmeezakhtar.github.io/YM-Rugs/" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 9px; margin-top: 20px; padding: 12px 20px; border-radius: 999px; background: #d75f38; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -0.03em; box-shadow: 0 8px 20px rgba(120,50,25,0.28);" style-hover="background: #b94b28; color: #fff;">Visit project<span style="font-size: 15px;">↗</span></a>
+        </div>
+      </article>
+
+      <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.7s cubic-bezier(0.2,0.75,0.2,1), transform 0.7s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.7s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
+          <image-slot id="proj-6" shape="rect" placeholder="Drop Catify screenshot" src="assets/catify-preview.webp"></image-slot>
+        </div>
+        <div style="padding: clamp(18px, 2.2vw, 28px);">
+          <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Catify - 2023</h3>
+          <p style="margin: 10px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #3c4b5c; text-wrap: pretty;">A Tinder-style landing page concept for a cat meetup app.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0;">
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">HTML</span>
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">CSS</span>
+          </div>
+          <a href="https://talmeezakhtar.github.io/Catify/" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 9px; margin-top: 20px; padding: 12px 20px; border-radius: 999px; background: #d75f38; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -0.03em; box-shadow: 0 8px 20px rgba(120,50,25,0.28);" style-hover="background: #b94b28; color: #fff;">Visit project<span style="font-size: 15px;">↗</span></a>
+        </div>
+      </article>
+
+      <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.7s cubic-bezier(0.2,0.75,0.2,1), transform 0.7s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.7s ease; background: rgba(255,252,248,0.5); border: 1px dashed rgba(255,255,255,0.5); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.06); min-height: clamp(260px, 32vw, 420px);">
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.25);">
+          <image-slot id="proj-2" shape="rect" placeholder="Drop next project screenshot"></image-slot>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Contact" id="contact" style="position: relative; width: 100%; padding: clamp(70px, 11vh, 140px) clamp(16px, 4vw, 72px) clamp(52px, 8vh, 96px); background: #0b0d1e; font-family: Inter, Helvetica, Arial, sans-serif; letter-spacing: -0.05em; color: #f4ece4; overflow: hidden;">
+
+  <img src="assets/sky.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 65%; transform: scaleY(-1); filter: saturate(0.6) brightness(0.24) hue-rotate(202deg);">
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,28,62,0.86) 0%, rgba(14,16,42,0.92) 55%, rgba(6,8,22,0.96) 100%);"></div>
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: clamp(80px, 14vh, 180px); z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(26,28,62,0.95), rgba(26,28,62,0));"></div>
+
+  <div style="position: relative; z-index: 3; max-width: 900px; margin: 0 auto;">
+
+    <div data-reveal="" style="opacity: 0; transform: translateY(30px); transition: opacity 0.85s cubic-bezier(0.2,0.75,0.2,1), transform 0.85s cubic-bezier(0.2,0.75,0.2,1); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; margin-bottom: clamp(28px, 5vh, 56px);">
+      <span style="display: inline-flex; align-items: center; gap: 8px; font-size: clamp(10px, 0.9vw, 12px); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #ffb98c;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #ff9a5c;"></span>Contact
+      </span>
+      <h2 style="margin: 0; font-size: clamp(30px, 4vw, 62px); line-height: 0.95; font-weight: 800; letter-spacing: -0.05em;">Let's get in touch</h2>
+      <p style="margin: 0; max-width: 420px; font-size: clamp(12px, 1.05vw, 16px); line-height: 1.6; letter-spacing: -0.03em; color: #d9d3e6; text-wrap: pretty;">Open to internships, freelance work and interesting collaborations.</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(12px, 1.8vw, 20px);">
+
+      <a href="https://github.com/talmeezakhtar" target="_blank" rel="noreferrer" style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: rgba(28,31,62,0.66); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 18px 38px rgba(4,6,18,0.45); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #f4ece4;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 52px rgba(4,6,18,0.55); background: rgba(44,48,86,0.82); color: #ffb98c;">
+        <img src="https://cdn.simpleicons.org/github/f0d7bd" alt="" style="width: 34px; height: 34px; display: block;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">GitHub</span>
+        <span style="font-size: 12px; font-weight: 500; color: #a7aec9;">@talmeezakhtar</span>
+      </a>
+
+      <a href="https://www.linkedin.com/in/talmeez-akhtar-308870242/" target="_blank" rel="noreferrer" style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: rgba(28,31,62,0.66); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 18px 38px rgba(4,6,18,0.45); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #f4ece4;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 52px rgba(4,6,18,0.55); background: rgba(44,48,86,0.82); color: #ffb98c;">
+        <img src="assets/linkedin.svg" alt="" style="width: 34px; height: 34px; display: block;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">LinkedIn</span>
+        <span style="font-size: 12px; font-weight: 500; color: #a7aec9;">Talmeez Akhtar</span>
+      </a>
+
+      <a href="https://www.instagram.com/akhtartalmeez/" target="_blank" rel="noreferrer" style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: rgba(28,31,62,0.66); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 18px 38px rgba(4,6,18,0.45); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #f4ece4;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 52px rgba(4,6,18,0.55); background: rgba(44,48,86,0.82); color: #ffb98c;">
+        <img src="https://cdn.simpleicons.org/instagram/f0d7bd" alt="" style="width: 34px; height: 34px; display: block;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">Instagram</span>
+        <span style="font-size: 12px; font-weight: 500; color: #a7aec9;">@akhtartalmeez</span>
+      </a>
+
+      <a href="https://www.facebook.com/talmeez.akhtar.9/" target="_blank" rel="noreferrer" style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: rgba(28,31,62,0.66); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 18px 38px rgba(4,6,18,0.45); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #f4ece4;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 52px rgba(4,6,18,0.55); background: rgba(44,48,86,0.82); color: #ffb98c;">
+        <img src="https://cdn.simpleicons.org/facebook/f0d7bd" alt="" style="width: 34px; height: 34px; display: block;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">Facebook</span>
+        <span style="font-size: 12px; font-weight: 500; color: #a7aec9;">Profile</span>
+      </a>
+
+      <a href="mailto:talmeezmzp@gmail.com" style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: rgba(28,31,62,0.66); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 18px 38px rgba(4,6,18,0.45); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #f4ece4;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 52px rgba(4,6,18,0.55); background: rgba(44,48,86,0.82); color: #ffb98c;">
+        <img src="https://cdn.simpleicons.org/gmail/f0d7bd" alt="" style="width: 34px; height: 34px; display: block;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">Email</span>
+        <span style="font-size: 12px; font-weight: 500; color: #a7aec9;">talmeezmzp@gmail.com</span>
+      </a>
+
+      <a href="assets/Talmeez_Akhtar_Resume.pdf" target="_blank" rel="noreferrer" download style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: #d75f38; border: 1px solid rgba(255,255,255,0.35); box-shadow: 0 16px 34px rgba(120,50,25,0.3); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #fff;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 48px rgba(120,50,25,0.38); background: #b94b28; color: #fff;">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+          <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path>
+          <path d="M14 3v5h5"></path>
+          <path d="M9 13h6M9 17h4"></path>
+        </svg>
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">Resume</span>
+        <span style="font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.82);">Download PDF</span>
+      </a>
+
+    </div>
+
+    <p style="margin: clamp(34px, 6vh, 64px) 0 0; text-align: center; font-size: 12px; font-weight: 500; letter-spacing: -0.02em; color: #8b93ad;">© 2026 Talmeez Akhtar</p>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;fontFamily&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Instrument Serif&quot;,&quot;Playfair Display&quot;,&quot;DM Serif Display&quot;,&quot;Inter (sans)&quot;],&quot;default&quot;:&quot;Inter (sans)&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Typography&quot;},&quot;heroTextColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#16202b&quot;,&quot;#2a1d18&quot;,&quot;#3b2a4a&quot;,&quot;#ffffff&quot;],&quot;default&quot;:&quot;#16202b&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Typography&quot;},&quot;heroAccentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#d75f38&quot;,&quot;#b94b28&quot;,&quot;#9e3d16&quot;,&quot;#2f6f5e&quot;],&quot;default&quot;:&quot;#d75f38&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Typography&quot;},&quot;showAvailability&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Composition&quot;},&quot;showEyebrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Composition&quot;},&quot;showSkillTrail&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Skills trail&quot;},&quot;trailSize&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:64,&quot;min&quot;:36,&quot;max&quot;:110,&quot;step&quot;:2,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Skills trail&quot;},&quot;trailSpacing&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:80,&quot;min&quot;:30,&quot;max&quot;:160,&quot;step&quot;:5,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Skills trail&quot;},&quot;grassScale&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:100,&quot;min&quot;:80,&quot;max&quot;:180,&quot;step&quot;:2,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero layout&quot;},&quot;grassDrop&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0,&quot;min&quot;:-200,&quot;max&quot;:300,&quot;step&quot;:5,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero layout&quot;},&quot;personScale&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:100,&quot;min&quot;:60,&quot;max&quot;:140,&quot;step&quot;:2,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero layout&quot;},&quot;personDrop&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0,&quot;min&quot;:-150,&quot;max&quot;:150,&quot;step&quot;:5,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero layout&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.stageRef = React.createRef();
+    this.skyRef = React.createRef();
+    this.ringRef = React.createRef();
+    this.personRef = React.createRef();
+    this.grassRef = React.createRef();
+    this.copyRef = React.createRef();
+    this.eduRef = React.createRef();
+    this.timelineRef = React.createRef();
+    this.skillsRef = React.createRef();
+    this.trailRef = React.createRef();
+    this.projRef = React.createRef();
+    this.projGridRef = React.createRef();
+    this.trailSvgRef = React.createRef();
+    this.pathRef = React.createRef();
+    this.pathCoreRef = React.createRef();
+    this.pathGhostRef = React.createRef();
+    this.planeRef = React.createRef();
+    this.navRef = React.createRef();
+    this.state = { menuOpen: false };
+    this.onScroll = this.onScroll.bind(this);
+    this.onTrailMove = this.onTrailMove.bind(this);
+    this.toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
+    this.closeMenu = () => this.setState({ menuOpen: false });
+    this.onResize = () => { this.applyLayout(); this.onScroll(); };
+    this.trailIcons = ['c','cpp','java','js','ts','react','vite','tailwind','html','css','nodejs','nestjs','express','postgres','mysql','mongodb','elasticsearch','aws','docker','git','github','postman'];
+    this.trailIndex = 0;
+    this.trailLast = null;
+  }
+
+  componentDidMount() {
+    this.ticking = false;
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+    this.onScroll();
+    setTimeout(this.onScroll, 300);
+    const sec = this.skillsRef.current;
+    if (sec) sec.addEventListener('pointermove', this.onTrailMove);
+    this.trailIcons.forEach(n => { const i = new Image(); i.src = 'https://skillicons.dev/icons?i=' + n; });
+    this.setupReveals();
+    this.applyTheme();
+    this.applyLayout();
+    window.addEventListener('resize', this.onResize);
+    setTimeout(() => this.applyLayout(), 250);
+  }
+
+  applyTheme() {
+    const fams = {
+      'Instrument Serif': "'Instrument Serif', Georgia, serif",
+      'Playfair Display': "'Playfair Display', Georgia, serif",
+      'DM Serif Display': "'DM Serif Display', Georgia, serif",
+      'Inter (sans)': "Inter, Helvetica, Arial, sans-serif"
+    };
+    const key = this.props.fontFamily ?? 'Instrument Serif';
+    const stack = fams[key] || fams['Instrument Serif'];
+    if (key !== 'Inter (sans)' && !document.getElementById('dc-font-' + key.replace(/\s/g, ''))) {
+      const l = document.createElement('link');
+      l.id = 'dc-font-' + key.replace(/\s/g, '');
+      l.rel = 'stylesheet';
+      l.href = 'https://fonts.googleapis.com/css2?family=' + key.replace(/\s/g, '+') + ':ital,wght@0,400;0,500;0,600;0,700&display=swap';
+      document.head.appendChild(l);
+    }
+    let st = document.getElementById('dc-theme-tweak');
+    if (!st) { st = document.createElement('style'); st.id = 'dc-theme-tweak'; document.head.appendChild(st); }
+    const ink = this.props.heroTextColor ?? '#16202b';
+    const accent = this.props.heroAccentColor ?? '#d75f38';
+    st.textContent = 'body, [data-nav], [data-nav] *, section, section * { font-family: ' + stack + ' !important; }'
+      + '[data-hero-copy] h1, [data-hero-copy] h2, [data-hero-copy] p, [data-hero-copy] span { color: ' + ink + '; }'
+      + '[data-hero-copy] h1 span { color: ' + accent + ' !important; }'
+      + '[data-hero-rule] > span:first-child { background: ' + accent + ' !important; }';
+  }
+
+  applyLayout() {
+    const sky = this.skyRef.current;
+    const hero = sky ? sky.parentElement : null;
+    if (!hero) return;
+    const W = hero.clientWidth, H = hero.clientHeight;
+    if (!W || !H) return;
+    const p = this.props;
+    const gs = (p.grassScale ?? 100) / 100, rs = (p.ringScale ?? 100) / 100, ps = (p.personScale ?? 100) / 100;
+
+    const grassW = Math.max(W * 1.2, 1040) * gs;
+    const grassH = grassW * 816 / 1306;
+    const grassBottom = -grassH * 0.12 + (p.grassDrop ?? 0);
+    const grass = this.grassRef.current;
+    if (grass) {
+      grass.style.width = grassW + 'px';
+      grass.style.height = 'auto';
+      grass.style.top = 'auto';
+      grass.style.bottom = grassBottom + 'px';
+    }
+    const horizon = grassBottom + grassH * 0.5;
+
+    const ring = this.ringRef.current;
+    if (ring) {
+      const ringW = Math.min(Math.max(Math.min(W * 0.66, H * 1.0), 230), 660) * rs;
+      const ringH = ringW * 640 / 1152;
+      ring.style.width = ringW + 'px';
+      ring.style.height = 'auto';
+      ring.style.top = 'auto';
+      ring.style.bottom = (horizon - ringH * 0.14 + (p.ringDrop ?? 0)) + 'px';
+    }
+    const person = this.personRef.current;
+    if (person) {
+      person.style.height = Math.min(H * (W < 760 ? 0.6 : 0.74), 720) * ps + 'px';
+      person.style.maxWidth = W < 760 ? '150%' : '132%';
+      person.style.bottom = (p.personDrop ?? 0) + 'px';
+    }
+  }
+
+  componentDidUpdate() { this.applyLayout(); this.applyTheme(); }
+
+  setupReveals() {
+    this.revealNodes = Array.from(document.querySelectorAll('[data-reveal]'));
+    this.checkReveals();
+    setTimeout(() => this.checkReveals(), 400);
+  }
+
+  checkReveals() {
+    if (!this.revealNodes || !this.revealNodes.length) return;
+    const vh = window.innerHeight;
+    this.revealNodes = this.revealNodes.filter(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.88 && r.bottom > 0) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        return false;
+      }
+      return true;
+    });
+  }
+
+  paintNav() {
+    const nav = this.navRef.current;
+    if (!nav) return;
+    const probe = 46;
+    const ids = [['education', false], ['skills', true], ['work', true], ['contact', true]];
+    let dark = false;
+    ids.forEach(([id, isDark]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) dark = isDark;
+    });
+    const scrolled = window.scrollY > 24;
+    nav.style.color = dark ? '#f6ece2' : '#16202b';
+    nav.style.background = !scrolled ? 'transparent' : (dark ? 'rgba(16,18,42,0.62)' : 'rgba(255,255,255,0.7)');
+    nav.style.backdropFilter = scrolled ? 'blur(12px)' : 'none';
+    nav.style.boxShadow = scrolled ? (dark ? '0 10px 30px rgba(4,6,18,0.4)' : '0 8px 26px rgba(30,50,80,0.12)') : 'none';
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+    const sec = this.skillsRef.current;
+    if (sec) sec.removeEventListener('pointermove', this.onTrailMove);
+  }
+
+  buildFlightPath() {
+    const sec = this.projRef.current, grid = this.projGridRef.current;
+    const core = this.pathCoreRef.current, svg = this.trailSvgRef.current;
+    if (!sec || !grid || !core || !svg) return;
+    const sb = sec.getBoundingClientRect();
+    const gb = grid.getBoundingClientRect();
+    svg.setAttribute('viewBox', '0 0 ' + Math.round(sb.width) + ' ' + Math.round(sb.height));
+    const cards = Array.from(grid.querySelectorAll('[data-proj-card]'));
+    const pts = [{ x: sb.width / 2, y: Math.max(12, gb.top - sb.top - 18) }];
+    cards.forEach((c, i) => {
+      const cb = c.getBoundingClientRect();
+      const cx = cb.left + cb.width / 2 - sb.left;
+      const cy = cb.top + cb.height / 2 - sb.top;
+      const side = i % 2 === 0 ? -1 : 1;
+      pts.push({ x: cx + side * Math.min(cb.width * 0.62, 240), y: cy });
+    });
+    pts.push({ x: sb.width / 2, y: sb.height - 24 });
+    let d = 'M ' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || pts[i + 1];
+      const c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
+      const c2x = p2.x - (p3.x - p1.x) / 6, c2y = p2.y - (p3.y - p1.y) / 6;
+      d += ' C ' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) + ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) + ', ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1);
+    }
+    [this.pathRef, this.pathCoreRef, this.pathGhostRef].forEach(r => { if (r.current) r.current.setAttribute('d', d); });
+    this.flightLen = core.getTotalLength();
+    this.cardMarks = cards.map(c => {
+      const cb = c.getBoundingClientRect();
+      return (cb.top + cb.height * 0.45 - sb.top);
+    });
+  }
+
+  updateFlight() {
+    const sec = this.projRef.current, core = this.pathCoreRef.current, plane = this.planeRef.current;
+    if (!sec || !core || !plane) return;
+    const vh = window.innerHeight;
+    const sb = sec.getBoundingClientRect();
+    if (!this.flightLen || Math.abs((this.lastSecW || 0) - sb.width) > 2 || Math.abs((this.lastSecH || 0) - sb.height) > 2) {
+      this.lastSecW = sb.width; this.lastSecH = sb.height;
+      this.buildFlightPath();
+      if (!this.flightLen) return;
+    }
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const startTop = vh * 0.82, endTop = -(sb.height - vh * 0.55);
+    const raw = clamp((startTop - sb.top) / Math.max(1, startTop - endTop), 0, 1);
+    const p = Math.pow(raw, 1.75);
+    const L = this.flightLen;
+    const dash = L * p;
+    [this.pathRef, this.pathCoreRef].forEach(r => {
+      if (r.current) { r.current.style.strokeDasharray = L + ' ' + L; r.current.style.strokeDashoffset = (L - dash); }
+    });
+    const pt = core.getPointAtLength(dash);
+    const pt2 = core.getPointAtLength(Math.min(L, dash + 6));
+    const angRad = Math.atan2(pt2.y - pt.y, pt2.x - pt.x);
+    const ang = angRad * 180 / Math.PI;
+    const flipY = Math.cos(angRad) > 0 ? -1 : 1;
+    const scaleX = sb.width / Math.max(1, Math.round(sb.width));
+    plane.style.transform = 'translate(' + (pt.x * scaleX - plane.offsetWidth / 2) + 'px, ' + (pt.y - plane.offsetHeight / 2) + 'px) rotate(' + (ang + 180) + 'deg) scaleY(' + flipY + ')';
+    plane.style.opacity = p > 0.002 && p < 0.999 ? '1' : '0';
+    const cards = Array.from(sec.querySelectorAll('[data-proj-card]'));
+    cards.forEach((c, i) => {
+      const mark = this.cardMarks[i];
+      const on = pt.y >= mark - 40 || p >= 0.999;
+      c.style.opacity = on ? '1' : '0';
+      c.style.transform = on ? 'translateY(0) scale(1)' : 'translateY(44px) scale(0.97)';
+      c.style.boxShadow = on ? '0 22px 48px rgba(30,60,100,0.18)' : '0 10px 24px rgba(30,60,100,0.1)';
+    });
+  }
+
+  onTrailMove(e) {
+    if ((this.props.showSkillTrail ?? true) === false) return;
+    const layer = this.trailRef.current;
+    if (!layer) return;
+    const box = layer.getBoundingClientRect();
+    const x = e.clientX - box.left, y = e.clientY - box.top;
+    const step = this.props.trailSpacing ?? 80;
+    if (this.trailLast) {
+      const dx = x - this.trailLast.x, dy = y - this.trailLast.y;
+      if (Math.sqrt(dx * dx + dy * dy) < step) return;
+    }
+    this.trailLast = { x: x, y: y };
+    const name = this.trailIcons[this.trailIndex % this.trailIcons.length];
+    this.trailIndex++;
+    const size = this.props.trailSize ?? 64;
+    const img = document.createElement('img');
+    img.src = 'https://skillicons.dev/icons?i=' + name;
+    img.alt = '';
+    img.style.cssText = 'position:absolute;left:' + x + 'px;top:' + y + 'px;width:' + size + 'px;height:' + size + 'px;margin-left:' + (-size / 2) + 'px;margin-top:' + (-size / 2) + 'px;border-radius:' + Math.round(size * 0.26) + 'px;display:block;will-change:transform,opacity;filter:drop-shadow(0 10px 20px rgba(106,58,32,0.32));';
+    layer.appendChild(img);
+    while (layer.childElementCount > 18) layer.removeChild(layer.firstElementChild);
+    const rot = (Math.random() * 26 - 13).toFixed(1);
+    const anim = img.animate([
+      { transform: 'scale(0.45) rotate(0deg)', opacity: 0 },
+      { transform: 'scale(1) rotate(' + rot + 'deg)', opacity: 1, offset: 0.18 },
+      { transform: 'scale(0.7) rotate(' + rot + 'deg) translateY(18px)', opacity: 0 }
+    ], { duration: 1050, easing: 'cubic-bezier(0.22,0.8,0.25,1)', fill: 'forwards' });
+    anim.onfinish = () => img.remove();
+  }
+
+  onScroll() {
+    if (this.ticking) return;
+    this.ticking = true;
+    requestAnimationFrame(() => { this.ticking = false; this.update(); });
+  }
+
+  update() {
+    const vh = window.innerHeight;
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const stage = this.stageRef.current;
+    if (stage) {
+      const r = stage.getBoundingClientRect();
+      const span = Math.max(1, r.height - vh);
+      const p = clamp(-r.top / span, 0, 1);
+      const q = clamp(p / 0.86, 0, 1);
+      const e = q * q * (3 - 2 * q);
+      const ring = this.ringRef.current;
+      if (ring) {
+        ring.style.transformOrigin = '50% 50%';
+        ring.style.transform = 'translateX(-50%) scale(' + (1 + e * 3.2) + ')';
+        ring.style.opacity = String(clamp(1 - (p - 0.78) / 0.22, 0, 1));
+      }
+      const grass = this.grassRef.current;
+      if (grass) {
+        grass.style.transform = 'translateX(-50%) translateY(' + (e * 115) + 'vh)';
+      }
+      const person = this.personRef.current;
+      if (person) {
+        person.style.transform = 'translateX(-50%) translateY(' + (e * 60) + 'vh) scale(' + (1 + e * 0.35) + ')';
+        person.style.opacity = String(clamp(1 - (p - 0.6) / 0.3, 0, 1));
+      }
+      const sky = this.skyRef.current;
+      if (sky) sky.style.transform = 'scale(' + (1 + e * 0.22) + ')';
+      const copy = this.copyRef.current;
+      if (copy) {
+        copy.style.opacity = String(clamp(1 - p / 0.38, 0, 1));
+        copy.style.transform = 'translateY(calc(-50% - ' + (e * 90) + 'px))';
+      }
+    }
+
+    this.updateFlight();
+    this.paintNav();
+    this.checkReveals();
+
+    const tl = this.timelineRef.current;
+    if (!tl) return;
+    const rows = Array.from(tl.querySelectorAll('[data-edu-row]'));
+    if (!rows.length) return;
+    const focus = vh * 0.48;
+    let best = 0, bestD = Infinity;
+    rows.forEach((row, i) => {
+      const rb = row.getBoundingClientRect();
+      const d = Math.abs(rb.top + rb.height / 2 - focus);
+      if (d < bestD) { bestD = d; best = i; }
+    });
+    const tlBox = tl.getBoundingClientRect();
+    const atEnd = window.scrollY + vh >= document.documentElement.scrollHeight - 4;
+    if (atEnd || tlBox.bottom < focus) best = rows.length - 1;
+    const passed = tlBox.top < vh * 0.85;
+    rows.forEach((row, i) => {
+      const on = passed && i === best;
+      row.style.opacity = on ? '1' : '0.45';
+      row.style.transform = on ? 'translateY(0)' : 'translateY(4px)';
+      const card = row.querySelector('[data-edu-card]');
+      if (card) {
+        card.style.background = on ? 'rgba(255,249,242,0.92)' : 'rgba(255,249,242,0.18)';
+        card.style.borderColor = on ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.35)';
+        card.style.boxShadow = on ? '0 22px 48px rgba(106,58,32,0.22)' : '0 4px 14px rgba(106,58,32,0.06)';
+      }
+      const node = row.querySelector('[data-edu-node]');
+      if (node) {
+        node.style.transform = on ? 'scale(1.12)' : 'scale(0.86)';
+        node.style.opacity = on ? '1' : '0.5';
+        node.style.filter = on ? 'drop-shadow(0 8px 14px rgba(106,58,32,0.3))' : 'drop-shadow(0 4px 8px rgba(106,58,32,0.14)) saturate(0.6)';
+      }
+    });
+
+    const trav = tl.querySelector('[data-edu-traveler]');
+    const activeRow = rows[best];
+    const node = activeRow.querySelector('[data-edu-node]');
+    if (trav && node) {
+      const nb = node.getBoundingClientRect();
+      trav.style.left = (nb.left + nb.width / 2 - tlBox.left) + 'px';
+      trav.style.top = (nb.top + nb.height / 2 - tlBox.top) + 'px';
+      trav.style.opacity = passed ? '1' : '0';
+      if (this.lastActive !== best) {
+        this.lastActive = best;
+        const dog = trav.querySelector('[data-traveler-dog]');
+        if (dog) {
+          dog.style.animation = 'none';
+          void dog.offsetWidth;
+          dog.style.animation = 'dogTrot 0.4s ease-in-out 2, dogIdle 2.6s ease-in-out 0.8s infinite';
+        }
+      }
+      const dateCol = activeRow.firstElementChild;
+      const dateEl = dateCol;
+
+      const yearText = dateEl ? (dateEl.textContent.match(/\d{4}/g) || []).slice(-1)[0] : '';
+      const y = trav.querySelector('[data-traveler-year]');
+      if (y && yearText) y.textContent = "'" + yearText.slice(2);
+    }
+  }
+
+  renderVals() {
+    return {
+      showAvailability: this.props.showAvailability ?? true,
+      showEyebrow: this.props.showEyebrow ?? true,
+      stageRef: this.stageRef,
+      skyRef: this.skyRef,
+      ringRef: this.ringRef,
+      personRef: this.personRef,
+      grassRef: this.grassRef,
+      copyRef: this.copyRef,
+      eduRef: this.eduRef,
+      timelineRef: this.timelineRef,
+      projRef: this.projRef,
+      projGridRef: this.projGridRef,
+      trailSvgRef: this.trailSvgRef,
+      pathRef: this.pathRef,
+      pathCoreRef: this.pathCoreRef,
+      pathGhostRef: this.pathGhostRef,
+      planeRef: this.planeRef,
+      skillsRef: this.skillsRef,
+      trailRef: this.trailRef,
+      navRef: this.navRef,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: this.toggleMenu,
+      closeMenu: this.closeMenu
+    };
+  }
+}
+</script>
+</body>
+</html>

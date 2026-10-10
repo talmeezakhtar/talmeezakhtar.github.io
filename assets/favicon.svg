@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .line { transform-box: fill-box; transform-origin: left center; animation: type 3s ease-in-out infinite; }
+    .line1 { animation-delay: 0s; }
+    .line2 { animation-delay: 0.3s; }
+    .line3 { animation-delay: 0.6s; }
+    .cursor { animation: blink 1s steps(2, start) infinite; }
+    @keyframes type {
+      0%   { transform: scaleX(0); }
+      12%  { transform: scaleX(1); }
+      78%  { transform: scaleX(1); }
+      92%  { transform: scaleX(0); }
+      100% { transform: scaleX(0); }
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+
+  <rect x="3" y="3" width="26" height="17" rx="2" fill="#16202b"/>
+  <rect x="3" y="3" width="26" height="17" rx="2" fill="none" stroke="#d75f38" stroke-width="1.4"/>
+
+  <rect class="line line1" x="6.5" y="8"  width="15" height="2" rx="1" fill="#ff9a5c"/>
+  <rect class="line line2" x="6.5" y="12" width="11" height="2" rx="1" fill="#f4ece4"/>
+  <rect class="line line3" x="6.5" y="16" width="13" height="2" rx="1" fill="#f4ece4"/>
+  <rect class="cursor" x="20.5" y="16" width="2" height="2" rx="0.5" fill="#d75f38"/>
+
+  <path d="M1 22 L31 22 L27.5 27 L4.5 27 Z" fill="#d75f38"/>
+  <rect x="13" y="23.4" width="6" height="1.4" rx="0.7" fill="#16202b" opacity="0.5"/>
+</svg>

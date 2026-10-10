@@ -1,42 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <style>
-    .glow { animation: pulse 2.4s ease-in-out infinite; }
-    .hand { transform-box: fill-box; transform-origin: center; animation: type 4s ease-in-out infinite; }
-    .handR { animation-delay: 0.12s; }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.45; }
-      50%      { opacity: 1; }
-    }
+    .line { transform-box: fill-box; transform-origin: left center; animation: type 3s ease-in-out infinite; }
+    .line1 { animation-delay: 0s; }
+    .line2 { animation-delay: 0.3s; }
+    .line3 { animation-delay: 0.6s; }
+    .cursor { animation: blink 1s steps(2, start) infinite; }
     @keyframes type {
-      0%, 54%   { transform: translateY(0); }
-      56%       { transform: translateY(-1.4px); }
-      58%       { transform: translateY(0); }
-      60%       { transform: translateY(-1.2px); }
-      62%       { transform: translateY(0); }
-      64%       { transform: translateY(-1.5px); }
-      66%, 100% { transform: translateY(0); }
+      0%   { transform: scaleX(0); }
+      12%  { transform: scaleX(1); }
+      78%  { transform: scaleX(1); }
+      92%  { transform: scaleX(0); }
+      100% { transform: scaleX(0); }
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
   </style>
 
-  <!-- silhouette: head + rim-lit hairline -->
-  <circle cx="16" cy="7" r="4.3" fill="#0a0c1a"/>
-  <path class="glow" d="M11.8 6.6 A4.3 4.3 0 0 1 20.2 6.6" fill="none" stroke="#2bff9e" stroke-width="0.8" opacity="0.8"/>
+  <rect x="3" y="3" width="26" height="17" rx="2" fill="#16202b"/>
+  <rect x="3" y="3" width="26" height="17" rx="2" fill="none" stroke="#d75f38" stroke-width="1.4"/>
 
-  <!-- shoulders -->
-  <path d="M12.5 11 L19.5 11 L23.5 18 L8.5 18 Z" fill="#0a0c1a"/>
+  <rect class="line line1" x="6.5" y="8"  width="15" height="2" rx="1" fill="#ff9a5c"/>
+  <rect class="line line2" x="6.5" y="12" width="11" height="2" rx="1" fill="#f4ece4"/>
+  <rect class="line line3" x="6.5" y="16" width="13" height="2" rx="1" fill="#f4ece4"/>
+  <rect class="cursor" x="20.5" y="16" width="2" height="2" rx="0.5" fill="#d75f38"/>
 
-  <!-- laptop lid, back facing the viewer: soft outer halo + crisp inner edge -->
-  <rect class="glow" x="4.3" y="13.3" width="23.4" height="11.4" rx="2" fill="none" stroke="#2bff9e" stroke-width="1.6" opacity="0.3"/>
-  <rect x="5" y="14" width="22" height="10" rx="1.5" fill="#0a0c1a" stroke="#2bff9e" stroke-width="1"/>
-
-  <!-- hinge seam glowing where screen light leaks out -->
-  <rect class="glow" x="6" y="23.5" width="20" height="0.9" rx="0.45" fill="#2bff9e"/>
-
-  <!-- keyboard base -->
-  <path d="M3 24 L29 24 L26 29 L6 29 Z" fill="#0a0c1a" stroke="#2bff9e" stroke-width="0.6" opacity="0.9"/>
-  <rect class="glow" x="12.5" y="26.1" width="7" height="1" rx="0.5" fill="#2bff9e" opacity="0.7"/>
-
-  <!-- hands, typing burst every few seconds -->
-  <rect class="hand handL" x="9.5" y="21.8" width="4" height="2.6" rx="1.2" fill="#0a0c1a" stroke="#2bff9e" stroke-width="0.6"/>
-  <rect class="hand handR" x="18.5" y="21.8" width="4" height="2.6" rx="1.2" fill="#0a0c1a" stroke="#2bff9e" stroke-width="0.6"/>
+  <path d="M1 22 L31 22 L27.5 27 L4.5 27 Z" fill="#d75f38"/>
+  <rect x="13" y="23.4" width="6" height="1.4" rx="0.7" fill="#16202b" opacity="0.5"/>
 </svg>

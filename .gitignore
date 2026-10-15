@@ -6,3 +6,5 @@
 # superseded by .webp versions
 /assets/*.png
 /assets/*.jpg
+# no webp converter was available when this was added; tracked as jpg
+!/assets/unslog-preview.jpg

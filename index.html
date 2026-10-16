@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +45,9 @@
   "url": "https://talmeezakhtar.github.io/"
 }
 </script>
-<script src="./support.js"></script>
+<link rel="preload" as="image" href="assets/grass.webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
+<script src="./support.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -54,8 +56,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
-<script src="./image-slot.js"></script>
+<script src="./image-slot.js" defer></script>
 <style>
   html, body { margin: 0; padding: 0; }
   body { font-family: Inter, Helvetica, Arial, sans-serif; letter-spacing: -0.05em; background: #b9cbe4; }
@@ -136,7 +137,7 @@
 
   <img ref="{{ personRef }}" src="assets/person.webp" alt="Talmeez Akhtar" style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; height: min(70%, 700px); max-width: 132%; object-fit: contain; object-position: bottom; z-index: 3">
 
-  <img ref="{{ grassRef }}" src="assets/grass.webp" alt="" style="position: absolute; left: 50%; transform: translateX(-50%); width: max(112%, 1100px); height: auto; z-index: 2; pointer-events: none; top: 0;">
+  <img ref="{{ grassRef }}" src="assets/grass.webp" alt="" width="1040" height="650" fetchpriority="high" style="position: absolute; left: 50%; transform: translateX(-50%); width: max(112%, 1100px); height: auto; z-index: 2; pointer-events: none; top: 0;">
 
   <div ref="{{ copyRef }}" data-hero-copy="" style="position: absolute; top: 44%; left: clamp(16px, 4vw, 72px); z-index: 4;">
     <div style="max-width: min(560px, 44vw);">
@@ -169,7 +170,7 @@
     <div ref="{{ timelineRef }}" style="position: relative; display: flex; flex-direction: column; gap: clamp(18px, 2.6vh, 30px);">
 
       <div data-edu-traveler="" style="position: absolute; z-index: 5; left: 0; top: 0; width: 46px; margin-left: -23px; margin-top: -36px; display: flex; flex-direction: column; align-items: center; opacity: 0; pointer-events: none; transition: top 0.6s cubic-bezier(0.45, 0, 0.2, 1), opacity 0.4s ease;">
-        <img data-traveler-dog="" src="assets/dog.webp" alt="" style="width: 46px; height: auto; display: block; filter: drop-shadow(0 8px 12px rgba(106,58,32,0.3)); animation: dogIdle 2.6s ease-in-out infinite;">
+        <img data-traveler-dog="" src="assets/dog.webp" alt="" loading="lazy" style="width: 46px; height: auto; display: block; filter: drop-shadow(0 8px 12px rgba(106,58,32,0.3)); animation: dogIdle 2.6s ease-in-out infinite;">
         <span data-traveler-year="" style="margin-top: -2px; padding: 3px 9px; border-radius: 999px; background: #fff6ee; border: 1.5px solid #d75f38; font-size: 11px; font-weight: 800; letter-spacing: -0.03em; color: #9e3d16; line-height: 1.2; white-space: nowrap; display: none">18</span>
       </div>
 
@@ -180,7 +181,7 @@
         </div>
         <div data-edu-rail="" style="flex: 0 0 22px; position: relative; display: flex; justify-content: center;">
           <span style="position: absolute; top: clamp(22px, 2.6vw, 32px); bottom: -30px; width: 2px; background: rgba(140,96,68,0.4);"></span>
-          <img data-edu-node="" src="assets/bed.webp" alt="" style="position: relative; align-self: flex-start; flex: 0 0 auto; margin: clamp(18px, 2.2vw, 26px) -13px 0; width: 48px; height: 26px; aspect-ratio: 796 / 423; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(106,58,32,0.22)); transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;">
+          <img data-edu-node="" src="assets/bed.webp" alt="" loading="lazy" style="position: relative; align-self: flex-start; flex: 0 0 auto; margin: clamp(18px, 2.2vw, 26px) -13px 0; width: 48px; height: 26px; aspect-ratio: 796 / 423; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(106,58,32,0.22)); transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;">
         </div>
         <div data-edu-card="" style="flex: 1 1 260px; min-width: 240px; background: rgba(255,249,242,0.82); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.75); border-radius: 20px; padding: clamp(18px, 2.2vw, 30px); box-shadow: 0 16px 38px rgba(106,58,32,0.16); transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;">
           <h3 style="margin: 0; font-size: clamp(17px, 1.8vw, 26px); font-weight: 700; letter-spacing: -0.05em;">Daffodils Public School</h3>
@@ -196,7 +197,7 @@
         </div>
         <div data-edu-rail="" style="flex: 0 0 22px; position: relative; display: flex; justify-content: center;">
           <span style="position: absolute; top: clamp(22px, 2.6vw, 32px); bottom: -30px; width: 2px; background: rgba(140,96,68,0.4);"></span>
-          <img data-edu-node="" src="assets/bed.webp" alt="" style="position: relative; align-self: flex-start; flex: 0 0 auto; margin: clamp(18px, 2.2vw, 26px) -13px 0; width: 48px; height: 26px; aspect-ratio: 796 / 423; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(106,58,32,0.22)); transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;">
+          <img data-edu-node="" src="assets/bed.webp" alt="" loading="lazy" style="position: relative; align-self: flex-start; flex: 0 0 auto; margin: clamp(18px, 2.2vw, 26px) -13px 0; width: 48px; height: 26px; aspect-ratio: 796 / 423; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(106,58,32,0.22)); transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;">
         </div>
         <div data-edu-card="" style="flex: 1 1 260px; min-width: 240px; background: rgba(255,249,242,0.82); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.75); border-radius: 20px; padding: clamp(18px, 2.2vw, 30px); box-shadow: 0 16px 38px rgba(106,58,32,0.16); transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;">
           <h3 style="margin: 0; font-size: clamp(17px, 1.8vw, 26px); font-weight: 700; letter-spacing: -0.05em;">Daffodils Public School</h3>
@@ -211,7 +212,7 @@
           <div style="margin-top: 4px; font-size: clamp(12px, 1vw, 15px); font-weight: 600; color: #5b3d2b;">Undergraduate</div>
         </div>
         <div data-edu-rail="" style="flex: 0 0 22px; position: relative; display: flex; justify-content: center;">
-          <img data-edu-node="" src="assets/bed.webp" alt="" style="position: relative; align-self: flex-start; flex: 0 0 auto; margin: clamp(18px, 2.2vw, 26px) -13px 0; width: 48px; height: 26px; aspect-ratio: 796 / 423; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(106,58,32,0.22)); transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;">
+          <img data-edu-node="" src="assets/bed.webp" alt="" loading="lazy" style="position: relative; align-self: flex-start; flex: 0 0 auto; margin: clamp(18px, 2.2vw, 26px) -13px 0; width: 48px; height: 26px; aspect-ratio: 796 / 423; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(106,58,32,0.22)); transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;">
         </div>
         <div data-edu-card="" style="flex: 1 1 260px; min-width: 240px; background: rgba(255,249,242,0.82); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.75); border-radius: 20px; padding: clamp(18px, 2.2vw, 30px); box-shadow: 0 16px 38px rgba(106,58,32,0.16); transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;">
           <h3 style="margin: 0; font-size: clamp(17px, 1.8vw, 26px); font-weight: 700; letter-spacing: -0.05em;">RCC Institute of Information Technology</h3>
@@ -244,28 +245,28 @@
     </div>
 
     <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(18px, 3.2vw, 46px); max-width: 860px; margin: 0 auto; padding: clamp(10px, 3vh, 40px) 0;">
-      <img src="https://skillicons.dev/icons?i=c" alt="C" title="C" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 0.00s infinite;">
-      <img src="https://skillicons.dev/icons?i=cpp" alt="C++" title="C++" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 0.27s infinite;">
-      <img src="https://skillicons.dev/icons?i=java" alt="Java" title="Java" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 0.54s infinite;">
-      <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" title="JavaScript" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 0.81s infinite;">
-      <img src="https://skillicons.dev/icons?i=ts" alt="TypeScript" title="TypeScript" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 1.08s infinite;">
-      <img src="https://skillicons.dev/icons?i=react" alt="React.js" title="React.js" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 1.35s infinite;">
-      <img src="https://skillicons.dev/icons?i=vite" alt="Vite" title="Vite" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 1.62s infinite;">
-      <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind CSS" title="Tailwind CSS" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 1.89s infinite;">
-      <img src="https://skillicons.dev/icons?i=html" alt="HTML5" title="HTML5" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 2.16s infinite;">
-      <img src="https://skillicons.dev/icons?i=css" alt="CSS3" title="CSS3" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 2.43s infinite;">
-      <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" title="Node.js" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 2.70s infinite;">
-      <img src="https://skillicons.dev/icons?i=nestjs" alt="NestJS" title="NestJS" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 2.97s infinite;">
-      <img src="https://skillicons.dev/icons?i=express" alt="Express.js" title="Express.js" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 3.24s infinite;">
-      <img src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL" title="PostgreSQL" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 3.51s infinite;">
-      <img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" title="MySQL" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 3.78s infinite;">
-      <img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB" title="MongoDB" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 4.05s infinite;">
-      <img src="https://skillicons.dev/icons?i=elasticsearch" alt="Elasticsearch" title="Elasticsearch" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 4.32s infinite;">
-      <img src="https://skillicons.dev/icons?i=aws" alt="AWS" title="AWS" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 4.59s infinite;">
-      <img src="https://skillicons.dev/icons?i=docker" alt="Docker" title="Docker" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 4.86s infinite;">
-      <img src="https://skillicons.dev/icons?i=git" alt="Git" title="Git" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 5.13s infinite;">
-      <img src="https://skillicons.dev/icons?i=github" alt="GitHub" title="GitHub" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 5.40s infinite;">
-      <img src="https://skillicons.dev/icons?i=postman" alt="Postman" title="Postman" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 5.67s infinite;">
+      <img src="assets/skills/c.svg" loading="lazy" alt="C" title="C" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 0.00s infinite;">
+      <img src="assets/skills/cpp.svg" loading="lazy" alt="C++" title="C++" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 0.27s infinite;">
+      <img src="assets/skills/java.svg" loading="lazy" alt="Java" title="Java" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 0.54s infinite;">
+      <img src="assets/skills/js.svg" loading="lazy" alt="JavaScript" title="JavaScript" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 0.81s infinite;">
+      <img src="assets/skills/ts.svg" loading="lazy" alt="TypeScript" title="TypeScript" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 1.08s infinite;">
+      <img src="assets/skills/react.svg" loading="lazy" alt="React.js" title="React.js" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 1.35s infinite;">
+      <img src="assets/skills/vite.svg" loading="lazy" alt="Vite" title="Vite" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 1.62s infinite;">
+      <img src="assets/skills/tailwind.svg" loading="lazy" alt="Tailwind CSS" title="Tailwind CSS" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 1.89s infinite;">
+      <img src="assets/skills/html.svg" loading="lazy" alt="HTML5" title="HTML5" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 2.16s infinite;">
+      <img src="assets/skills/css.svg" loading="lazy" alt="CSS3" title="CSS3" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 2.43s infinite;">
+      <img src="assets/skills/nodejs.svg" loading="lazy" alt="Node.js" title="Node.js" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 2.70s infinite;">
+      <img src="assets/skills/nestjs.svg" loading="lazy" alt="NestJS" title="NestJS" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 2.97s infinite;">
+      <img src="assets/skills/express.svg" loading="lazy" alt="Express.js" title="Express.js" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 3.24s infinite;">
+      <img src="assets/skills/postgres.svg" loading="lazy" alt="PostgreSQL" title="PostgreSQL" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 3.51s infinite;">
+      <img src="assets/skills/mysql.svg" loading="lazy" alt="MySQL" title="MySQL" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 3.78s infinite;">
+      <img src="assets/skills/mongodb.svg" loading="lazy" alt="MongoDB" title="MongoDB" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 4.05s infinite;">
+      <img src="assets/skills/elasticsearch.svg" loading="lazy" alt="Elasticsearch" title="Elasticsearch" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 4.32s infinite;">
+      <img src="assets/skills/aws.svg" loading="lazy" alt="AWS" title="AWS" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 6.4s ease-in-out 4.59s infinite;">
+      <img src="assets/skills/docker.svg" loading="lazy" alt="Docker" title="Docker" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.0s ease-in-out 4.86s infinite;">
+      <img src="assets/skills/git.svg" loading="lazy" alt="Git" title="Git" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 7.6s ease-in-out 5.13s infinite;">
+      <img src="assets/skills/github.svg" loading="lazy" alt="GitHub" title="GitHub" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.2s ease-in-out 5.40s infinite;">
+      <img src="assets/skills/postman.svg" loading="lazy" alt="Postman" title="Postman" style="width: clamp(52px, 6vw, 84px); height: clamp(52px, 6vw, 84px); display: block; border-radius: 22%; filter: drop-shadow(0 14px 24px rgba(106,58,32,0.3)); animation: skillFloat 5.8s ease-in-out 5.67s infinite;">
     </div>
   </div>
 </section>
@@ -284,7 +285,7 @@
     <path ref="{{ pathCoreRef }}" d="" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.95"></path>
   </svg>
 
-  <img ref="{{ planeRef }}" src="assets/plane.webp" alt="" style="position: absolute; left: 0; top: 0; width: clamp(86px, 9vw, 150px); height: auto; z-index: 6; pointer-events: none; opacity: 0; transform-origin: 50% 50%; filter: drop-shadow(0 14px 22px rgba(30,60,100,0.28));">
+  <img ref="{{ planeRef }}" src="assets/plane.webp" alt="" loading="lazy" style="position: absolute; left: 0; top: 0; width: clamp(86px, 9vw, 150px); height: auto; z-index: 6; pointer-events: none; opacity: 0; transform-origin: 50% 50%; filter: drop-shadow(0 14px 22px rgba(30,60,100,0.28));">
 
   <div style="position: relative; z-index: 4; max-width: 1120px; margin: 0 auto;">
 
@@ -410,7 +411,7 @@
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(12px, 1.8vw, 20px);">
 
       <a href="https://github.com/talmeezakhtar" target="_blank" rel="noreferrer" style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: rgba(28,31,62,0.66); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 18px 38px rgba(4,6,18,0.45); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #f4ece4;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 52px rgba(4,6,18,0.55); background: rgba(44,48,86,0.82); color: #ffb98c;">
-        <img src="https://cdn.simpleicons.org/github/f0d7bd" alt="GitHub" style="width: 34px; height: 34px; display: block;">
+        <img src="assets/github-icon.svg" alt="GitHub" style="width: 34px; height: 34px; display: block;">
         <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">GitHub</span>
         <span style="font-size: 12px; font-weight: 500; color: #a7aec9;">@talmeezakhtar</span>
       </a>
@@ -422,19 +423,19 @@
       </a>
 
       <a href="https://www.instagram.com/akhtartalmeez/" target="_blank" rel="noreferrer" style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: rgba(28,31,62,0.66); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 18px 38px rgba(4,6,18,0.45); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #f4ece4;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 52px rgba(4,6,18,0.55); background: rgba(44,48,86,0.82); color: #ffb98c;">
-        <img src="https://cdn.simpleicons.org/instagram/f0d7bd" alt="Instagram" style="width: 34px; height: 34px; display: block;">
+        <img src="assets/instagram-icon.svg" alt="Instagram" style="width: 34px; height: 34px; display: block;">
         <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">Instagram</span>
         <span style="font-size: 12px; font-weight: 500; color: #a7aec9;">@akhtartalmeez</span>
       </a>
 
       <a href="https://www.facebook.com/talmeez.akhtar.9/" target="_blank" rel="noreferrer" style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: rgba(28,31,62,0.66); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 18px 38px rgba(4,6,18,0.45); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #f4ece4;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 52px rgba(4,6,18,0.55); background: rgba(44,48,86,0.82); color: #ffb98c;">
-        <img src="https://cdn.simpleicons.org/facebook/f0d7bd" alt="Facebook" style="width: 34px; height: 34px; display: block;">
+        <img src="assets/facebook-icon.svg" alt="Facebook" style="width: 34px; height: 34px; display: block;">
         <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">Facebook</span>
         <span style="font-size: 12px; font-weight: 500; color: #a7aec9;">Profile</span>
       </a>
 
       <a href="mailto:talmeezmzp@gmail.com" style="flex: 0 1 158px; min-width: 132px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(20px, 2.4vw, 30px) 16px; border-radius: 22px; background: rgba(28,31,62,0.66); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 18px 38px rgba(4,6,18,0.45); transition: transform 0.35s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.35s ease, background 0.35s ease; color: #f4ece4;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 52px rgba(4,6,18,0.55); background: rgba(44,48,86,0.82); color: #ffb98c;">
-        <img src="https://cdn.simpleicons.org/gmail/f0d7bd" alt="Email" style="width: 34px; height: 34px; display: block;">
+        <img src="assets/gmail-icon.svg" alt="Email" style="width: 34px; height: 34px; display: block;">
         <span style="font-size: 14px; font-weight: 700; letter-spacing: -0.03em;">Email</span>
         <span style="font-size: 12px; font-weight: 500; color: #a7aec9;">talmeezmzp@gmail.com</span>
       </a>

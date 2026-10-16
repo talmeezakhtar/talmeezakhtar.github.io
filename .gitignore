@@ -8,3 +8,5 @@
 /assets/*.jpg
 # no webp converter was available when this was added; tracked as jpg
 !/assets/unslog-preview.jpg
+# social share image, referenced directly as png by og:image/twitter:image
+!/assets/og-image.png

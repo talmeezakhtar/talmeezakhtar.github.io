@@ -56,7 +56,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-<script src="./image-slot.js" defer></script>
 <style>
   html, body { margin: 0; padding: 0; }
   body { font-family: Inter, Helvetica, Arial, sans-serif; letter-spacing: -0.05em; background: #b9cbe4; }
@@ -117,11 +116,11 @@
     </button>
   </header>
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position: fixed; top: 74px; left: clamp(10px, 3vw, 24px); right: clamp(10px, 3vw, 24px); z-index: 59; display: flex; flex-direction: column; gap: 2px; padding: 8px 6px; border-radius: 22px; background: transparent; box-shadow: none; color: #16202b;">
-      <a href="#education" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right; text-shadow: 0 1px 12px rgba(255,255,255,0.55);" style-hover="color: #d75f38;">Education</a>
-      <a href="#skills" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right; text-shadow: 0 1px 12px rgba(255,255,255,0.55);" style-hover="color: #d75f38;">Skills</a>
-      <a href="#work" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right; text-shadow: 0 1px 12px rgba(255,255,255,0.55);" style-hover="color: #d75f38;">Projects</a>
-      <a href="#contact" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right; text-shadow: 0 1px 12px rgba(255,255,255,0.55);" style-hover="color: #d75f38;">Contact</a>
+    <div style="position: fixed; top: 74px; left: clamp(10px, 3vw, 24px); right: clamp(10px, 3vw, 24px); z-index: 59; display: flex; flex-direction: column; gap: 2px; padding: 8px 6px; border-radius: 22px; background: rgba(255,252,248,0.92); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 18px 40px rgba(16,18,42,0.28); color: #16202b;">
+      <a href="#education" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right;" style-hover="color: #d75f38;">Education</a>
+      <a href="#skills" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right;" style-hover="color: #d75f38;">Skills</a>
+      <a href="#work" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right;" style-hover="color: #d75f38;">Projects</a>
+      <a href="#contact" onClick="{{ closeMenu }}" style="padding: 13px 16px; border-radius: 14px; font-size: 17px; font-weight: 700; color: inherit; text-align: right;" style-hover="color: #d75f38;">Contact</a>
     </div>
   </sc-if>
 <div ref="{{ stageRef }}" id="top" style="position: relative; width: 100%; height: 185vh;">
@@ -287,7 +286,7 @@
 
   <img ref="{{ planeRef }}" src="assets/plane.webp" alt="" loading="lazy" style="position: absolute; left: 0; top: 0; width: clamp(86px, 9vw, 150px); height: auto; z-index: 6; pointer-events: none; opacity: 0; transform-origin: 50% 50%; filter: drop-shadow(0 14px 22px rgba(30,60,100,0.28));">
 
-  <div style="position: relative; z-index: 4; max-width: 1120px; margin: 0 auto;">
+  <div style="position: relative; z-index: 7; max-width: 1120px; margin: 0 auto;">
 
     <div data-reveal="" style="opacity: 0; transform: translateY(30px); transition: opacity 0.85s cubic-bezier(0.2,0.75,0.2,1), transform 0.85s cubic-bezier(0.2,0.75,0.2,1); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; margin-bottom: clamp(34px, 6vh, 72px);">
       <span style="display: inline-flex; align-items: center; gap: 8px; font-size: clamp(10px, 0.9vw, 12px); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #ffb98c;">
@@ -301,7 +300,37 @@
 
       <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.4s cubic-bezier(0.2,0.75,0.2,1), transform 0.4s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.4s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
         <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
-          <image-slot id="proj-7" shape="rect" placeholder="Drop Unslog screenshot" src="assets/unslog-preview.jpg"></image-slot>
+          <img src="assets/sushi-preview.webp" alt="Sushi screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+        <div style="padding: clamp(18px, 2.2vw, 28px);">
+          <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Sushi</h3>
+          <p style="margin: 10px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #3c4b5c; text-wrap: pretty;">A kaiten-style sushi restaurant concept with an animated conveyor belt menu — plates priced by ring, cycling through the day's dishes.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0;">
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">Next.js</span>
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">Tailwind CSS</span>
+          </div>
+          <a href="https://sushi-sigma-wheat.vercel.app/" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 9px; margin-top: 20px; padding: 12px 20px; border-radius: 999px; background: #d75f38; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -0.03em; box-shadow: 0 8px 20px rgba(120,50,25,0.28);" style-hover="background: #b94b28; color: #fff;">Visit project<span style="font-size: 15px;">↗</span></a>
+        </div>
+      </article>
+
+      <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.4s cubic-bezier(0.2,0.75,0.2,1), transform 0.4s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.4s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
+          <img src="assets/wick-and-web-preview.webp" alt="Wick &amp; Web screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+        <div style="padding: clamp(18px, 2.2vw, 28px);">
+          <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Wick &amp; Web</h3>
+          <p style="margin: 10px 0 0; font-size: clamp(12px, 1.05vw, 15px); line-height: 1.65; letter-spacing: -0.03em; color: #3c4b5c; text-wrap: pretty;">A whimsical candle-and-mug shop concept with a cobweb-strewn hero, sticky-note copy, and a resident spider mascot.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0;">
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">Next.js</span>
+            <span style="padding: 6px 11px; border-radius: 999px; background: rgba(215,95,56,0.1); font-size: 12px; font-weight: 600; color: #9e3d16;">Tailwind CSS</span>
+          </div>
+          <a href="https://wick-and-web.vercel.app/" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 9px; margin-top: 20px; padding: 12px 20px; border-radius: 999px; background: #d75f38; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -0.03em; box-shadow: 0 8px 20px rgba(120,50,25,0.28);" style-hover="background: #b94b28; color: #fff;">Visit project<span style="font-size: 15px;">↗</span></a>
+        </div>
+      </article>
+
+      <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.4s cubic-bezier(0.2,0.75,0.2,1), transform 0.4s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.4s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
+          <img src="assets/unslog-preview.jpg" alt="Unslog screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
         <div style="padding: clamp(18px, 2.2vw, 28px);">
           <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Unslog</h3>
@@ -316,7 +345,7 @@
 
       <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.4s cubic-bezier(0.2,0.75,0.2,1), transform 0.4s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.4s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
         <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
-          <image-slot id="proj-1" shape="rect" placeholder="Drop Bunakar screenshot" src="assets/bunakar-preview.webp"></image-slot>
+          <img src="assets/bunakar-preview.webp" alt="Bunakar screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
         <div style="padding: clamp(18px, 2.2vw, 28px);">
           <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Bunakar - Rug Design Studio</h3>
@@ -332,7 +361,7 @@
 
       <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.4s cubic-bezier(0.2,0.75,0.2,1), transform 0.4s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.4s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
         <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
-          <image-slot id="proj-3" shape="rect" placeholder="Drop Color-Cadence screenshot" src="assets/color-cadence-preview.webp"></image-slot>
+          <img src="assets/color-cadence-preview.webp" alt="Color-Cadence screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
         <div style="padding: clamp(18px, 2.2vw, 28px);">
           <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Color-Cadence - 2024</h3>
@@ -346,7 +375,7 @@
 
       <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.4s cubic-bezier(0.2,0.75,0.2,1), transform 0.4s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.4s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
         <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
-          <image-slot id="proj-4" shape="rect" placeholder="Drop Drum Kit screenshot" src="assets/drumkit-preview.webp"></image-slot>
+          <img src="assets/drumkit-preview.webp" alt="Drum Kit screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
         <div style="padding: clamp(18px, 2.2vw, 28px);">
           <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Drum Kit - 2024</h3>
@@ -360,7 +389,7 @@
 
       <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.4s cubic-bezier(0.2,0.75,0.2,1), transform 0.4s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.4s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
         <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
-          <image-slot id="proj-5" shape="rect" placeholder="Drop YM Rugs screenshot" src="assets/ym-rugs-preview.webp"></image-slot>
+          <img src="assets/ym-rugs-preview.webp" alt="YM Rugs screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
         <div style="padding: clamp(18px, 2.2vw, 28px);">
           <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">YM Rugs - 2023</h3>
@@ -375,7 +404,7 @@
 
       <article data-proj-card="" style="opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity 0.4s cubic-bezier(0.2,0.75,0.2,1), transform 0.4s cubic-bezier(0.2,0.75,0.2,1), box-shadow 0.4s ease; background: rgba(255,252,248,0.88); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 24px rgba(30,60,100,0.1);">
         <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; background: rgba(185,203,228,0.4);">
-          <image-slot id="proj-6" shape="rect" placeholder="Drop Catify screenshot" src="assets/catify-preview.webp"></image-slot>
+          <img src="assets/catify-preview.webp" alt="Catify screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
         <div style="padding: clamp(18px, 2.2vw, 28px);">
           <h3 style="margin: 0; font-size: clamp(18px, 1.9vw, 27px); font-weight: 700; letter-spacing: -0.05em; color: #16202b;">Catify - 2023</h3>
@@ -663,7 +692,7 @@ class Component extends DCLogic {
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const startTop = vh * 0.82, endTop = -(sb.height - vh * 0.55);
     const raw = clamp((startTop - sb.top) / Math.max(1, startTop - endTop), 0, 1);
-    const p = Math.pow(raw, 1.75);
+    const p = raw;
     const L = this.flightLen;
     const dash = L * p;
     [this.pathRef, this.pathCoreRef].forEach(r => {
